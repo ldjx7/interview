@@ -91,7 +91,6 @@ M必须拥有P才可以执行G中的代码，P含有一个包含多个G的队列
  sendq    waitq  // 等待写消息的goroutine队列
  lock mutex  //互斥锁，chan不允许并发读写
 }
-复制代码
 ```
 
 #### 3.2 读写流程
@@ -126,7 +125,6 @@ M必须拥有P才可以执行G中的代码，P含有一个包含多个G的队列
 ch := make(chan int)   
 //有缓冲channel不要求发送和接收操作同步
 ch := make(chan int, 2)  
-复制代码
 ```
 
 channel 无缓冲时，发送阻塞直到数据被接收，接收阻塞直到读到数据；channel有缓冲时，当缓冲满时发送阻塞，当缓冲空时接收阻塞。
@@ -150,7 +148,6 @@ Context 只定义了接口，凡是实现该接口的类都可称为是一种 co
    Err() error
    Value(key interface{}) interface{}
 }
-复制代码
 ```
 
 - 「Deadline」 方法：可以获取设置的截止时间，返回值 deadline 是截止时间，到了这个时间，Context 会自动发起取消请求，返回值 ok 表示是否设置了截止时间。
@@ -310,7 +307,6 @@ func main() {
 	fmt.Println(p == nil) // true
 	fmt.Println(i == nil) // false
 }
-复制代码
 ```
 
 - 例子中，将一个nil非接口值p赋值给接口i，此时,i的内部字段为(T=*int, V=nil)，i与p作比较时，将 p 转换为接口后再比较，因此 i == p，p 与 nil 比较，直接比较值，所以 p == nil。
@@ -377,7 +373,6 @@ func main() {
 	fmt.Printf("a=%+v	\n", a) // a=&{id:1 name:微客鸟窝}	
 	fmt.Printf("a=%#v	\n", a) // a=&main.student{id:1, name:"微客鸟窝"}
 }
-复制代码
 ```
 
 #### 28. 什么是 rune 类型？
@@ -401,7 +396,6 @@ func main() {
     //通过rune类型处理unicode字符
     fmt.Println("rune:", len([]rune(str))) //rune: 8
 }
-复制代码
 ```
 
 #### 29. 空 struct{} 占用空间么？
@@ -419,7 +413,6 @@ import (
 func main() {
 	fmt.Println(unsafe.Sizeof(struct{}{}))  //0
 }
-复制代码
 ```
 
 空结构体 struct{} 实例不占据任何的内存空间。
@@ -453,7 +446,6 @@ func main() {
 	fmt.Println(s.Has("Tom"))
 	fmt.Println(s.Has("Jack"))
 }
-复制代码
 ```
 
 1. 不发送数据的信道(channel)
@@ -472,7 +464,6 @@ func main() {
 	go worker(ch)
 	ch <- struct{}{}
 }
-复制代码
 ```
 
 1. 结构体只包含方法，不包含任何的字段
